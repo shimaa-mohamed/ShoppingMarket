@@ -1,0 +1,73 @@
+@import "index.scss";
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  ul {
+    list-style: none;
+    display: flex;
+  }
+  &__center {
+    width: 30px;
+    height: 30px;
+  }
+  &__left {
+    button {
+      padding: 30px 0px;
+      width: 65px;
+      text-transform: uppercase;
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      border-bottom: 2px solid $fade-green;
+      color: $fade-green;
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+  &__cart-badge {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  &__cart-img {
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom:5px;
+  }
+  &__items-num {
+    position: absolute;
+    top: 3px;
+    right: -3px;
+    background-color: #000;
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    padding: 5px;
+  }
+  &__currency{
+      padding:5px;
+      margin-right: 20px;
+      position: relative;
+
+      cursor: pointer;
+      img{
+          margin-left: 2px;
+      }
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "products":[{
+        "gallery":"../assets/itemImage.jpg",
+        "description":"product describtion",
+        "currency":"$",
+        "price":50.00
+    },
+    {
+        "gallery":"../assets/itemImage.jpg",
+        "description":"product describtion",
+        "currency":"$",
+        "price":50.00
+    },
+    {
+        "gallery":"../assets/itemImage.jpg",
+        "description":"product describtion",
+        "currency":"$",
+        "price":50.00
+    },
+    {
+        "gallery":"../assets/itemImage.jpg",
+        "description":"product describtion",
+        "currency":"$",
+        "price":50.00
+    },{
+        "gallery":"../assets/itemImage.jpg",
+        "description":"product describtion",
+        "currency":"$",
+        "price":50.00
+    }],
+    "currencies": [
+        "USD",
+        "GBP",
+        "AUD",
+        "JPY",
+        "RUB"
+      ]
+}

@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+@import "index.scss";
+
+.item-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  color: $gray-text;
+  padding: 11px 14px 16px 16px;
+  width: 386px;
+  height: 444px;
+  &__img {
+    width: 356px;
+    height: 338px;
+  }
+  &__describtion{
+      margin-top: 20px;
+  }
+}
