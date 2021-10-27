@@ -1,7 +1,20 @@
 @import "index.scss";
 
 .product-grid-wrapper{
+    position: absolute;
+    padding: 0 100px;
+    z-index: 0;
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 40px;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    place-items: center;
+    h1{
+        margin: 80px 0px 90px 0px;
+        grid-column: span 3;
+        justify-self: flex-start;
+        margin-left: 20px;
+    }
 }

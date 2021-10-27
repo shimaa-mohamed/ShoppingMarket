@@ -6,6 +6,7 @@ class ProductsGrid extends Component {
     render() {
         return (
             <div className="product-grid-wrapper">
+                <h1>Category name</h1>
                 {
                     Dummy.products.map((item,i)=>(
                         <ProductItem key={i} product={item}/>

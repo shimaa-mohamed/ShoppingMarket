@@ -1,38 +1,187 @@
 {
-    "products":[{
-        "gallery":"../assets/itemImage.jpg",
-        "description":"product describtion",
-        "currency":"$",
-        "price":50.00
+  "products": [
+    {
+      "id": "123456",
+      "name": "shoes",
+      "inStock": true,
+      "gallery": "../assets/itemImage.jpg",
+      "description": "shoes gamela awy",
+      "category": "clothes",
+      "attributes": [
+        {
+          "id": "123456",
+          "name": "shoes",
+          "type": "bla bla",
+          "items": [
+            {
+              "displayValue": "S",
+              "value": "small",
+              "id": "123456"
+            },
+            {
+              "displayValue": "M",
+              "value": "Medium",
+              "id": "123456"
+            }
+          ]
+        }
+      ],
+      "prices":[{
+          "currency":"USD",
+          "amount":75
+      }]
     },
     {
-        "gallery":"../assets/itemImage.jpg",
-        "description":"product describtion",
-        "currency":"$",
-        "price":50.00
+      "id": "123456",
+      "name": "shoes",
+      "inStock": true,
+      "gallery": "../assets/itemImage.jpg",
+      "description": "shoes gamela awy",
+      "category": "clothes",
+      "attributes": [
+        {
+          "id": "123456",
+          "name": "shoes",
+          "type": "bla bla",
+          "items": [
+            {
+              "displayValue": "S",
+              "value": "small",
+              "id": "123456"
+            },
+            {
+              "displayValue": "M",
+              "value": "Medium",
+              "id": "123456"
+            }
+          ]
+        }
+      ],
+      "prices":[{
+        "currency":"USD",
+        "amount":75
+    }]
     },
     {
-        "gallery":"../assets/itemImage.jpg",
-        "description":"product describtion",
-        "currency":"$",
-        "price":50.00
+      "id": "123456",
+      "name": "shoes",
+      "inStock": true,
+      "gallery": "../assets/itemImage.jpg",
+      "description": "shoes gamela awy",
+      "category": "clothes",
+      "attributes": [
+        {
+          "id": "123456",
+          "name": "shoes",
+          "type": "bla bla",
+          "items": [
+            {
+              "displayValue": "S",
+              "value": "small",
+              "id": "123456"
+            },
+            {
+              "displayValue": "M",
+              "value": "Medium",
+              "id": "123456"
+            }
+          ]
+        }
+      ],
+      "prices":[{
+        "currency":"USD",
+        "amount":75
+    }]
     },
     {
-        "gallery":"../assets/itemImage.jpg",
-        "description":"product describtion",
-        "currency":"$",
-        "price":50.00
-    },{
-        "gallery":"../assets/itemImage.jpg",
-        "description":"product describtion",
-        "currency":"$",
-        "price":50.00
-    }],
-    "currencies": [
-        "USD",
-        "GBP",
-        "AUD",
-        "JPY",
-        "RUB"
-      ]
+      "id": "123456",
+      "name": "shoes",
+      "inStock": true,
+      "gallery": "../assets/itemImage.jpg",
+      "description": "shoes gamela awy",
+      "category": "clothes",
+      "attributes": [
+        {
+          "id": "123456",
+          "name": "shoes",
+          "type": "bla bla",
+          "items": [
+            {
+              "displayValue": "S",
+              "value": "small",
+              "id": "123456"
+            },
+            {
+              "displayValue": "M",
+              "value": "Medium",
+              "id": "123456"
+            }
+          ]
+        }
+      ],
+      "prices":[{
+        "currency":"USD",
+        "amount":75
+    }]
+    },
+    {
+      "id": "123456",
+      "name": "shoes",
+      "inStock": true,
+      "gallery": "../assets/itemImage.jpg",
+      "description": "shoes gamela awy",
+      "category": "clothes",
+      "attributes": [
+        {
+          "id": "123456",
+          "name": "shoes",
+          "type": "bla bla",
+          "items": [
+            {
+              "displayValue": "S",
+              "value": "small",
+              "id": "123456"
+            },
+            {
+              "displayValue": "M",
+              "value": "Medium",
+              "id": "123456"
+            }
+          ]
+        }
+      ],
+      "prices":[{
+        "currency":"USD",
+        "amount":75
+    }]
+    }
+  ],
+  "currencies": ["USD", "GBP", "AUD", "JPY", "RUB"],
+  "productItem": {
+    "id": "123456",
+    "name": "shoes",
+    "inStock": true,
+    "gallery": "../assets/itemImage.jpg",
+    "description": "shoes gamela awy",
+    "category": "clothes",
+    "attributes": [
+      {
+        "id": "123456",
+        "name": "shoes",
+        "type": "bla bla",
+        "items": [
+          {
+            "displayValue": "S",
+            "value": "small",
+            "id": "123456"
+          },
+          {
+            "displayValue": "M",
+            "value": "Medium",
+            "id": "123456"
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -2,9 +2,11 @@
 
 .header-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 116px;
   align-items: center;
   height: 80px;
+  position: relative;
   ul {
     list-style: none;
     display: flex;
@@ -30,6 +32,9 @@
   &__right {
     display: flex;
     align-items: center;
+  }
+  .rotate{
+    transform: rotate(180deg);
   }
   &__cart-badge {
     position: relative;

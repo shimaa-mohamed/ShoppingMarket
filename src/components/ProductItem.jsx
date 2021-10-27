@@ -3,7 +3,10 @@ import ItemImg from "../assets/itemImage.jpg";
 import "../styles/ProductItemStyles.scss";
 class ProductItem extends Component {
   render() {
+    const currentCurrency="USD";
     const { product } = this.props;
+    const {currency,amount}=product.prices.find((price)=>price.currency===currentCurrency);
+    console.log(product);
     return (
       <div className="item-wrapper">
         <img src={ItemImg} alt="item-img" className="item-wrapper__img" />
@@ -11,8 +14,8 @@ class ProductItem extends Component {
         <p className="item-wrapper__price">
           {new Intl.NumberFormat("en", {
             style: "currency",
-            currency: product.currency,
-          }).format(product.price)}
+            currency: currency,
+          }).format(amount)}
         </p>
       </div>
     );

@@ -4,16 +4,20 @@ import ArrowImg from "../assets/arrowImg.svg";
 import EmptyCartImg from "../assets/emptyCartImg.svg";
 import "../styles/HeaderStyles.scss";
 import CurrencyOverlay from "./CurrencyOverlay";
+import CartOverlay from "./CartOverlay";
 class Header extends Component {
   state = {
     showCurrencyOverlay: false,
+    showCart:false
   };
   handleCurrency() {
-    console.log("hellooooo");
     this.setState({showCurrencyOverlay:!this.state.showCurrencyOverlay})
   }
+  handleCart() {
+    this.setState({showCart:!this.state.showCart})
+  }
   render() {
-    const { showCurrencyOverlay } = this.state;
+    const { showCurrencyOverlay,showCart } = this.state;
     console.log(showCurrencyOverlay);
     return (
       <header className="header-wrapper">
@@ -38,11 +42,11 @@ class Header extends Component {
             className="header-wrapper__currency"
             onClick={()=>this.handleCurrency()}
           >
-            $ <img src={ArrowImg} alt="arrow-img" />
+            $ <img src={ArrowImg} alt="arrow-img" className={`${showCurrencyOverlay?"rotate":""}`} />
             {showCurrencyOverlay && <CurrencyOverlay />}
           </div>
 
-          <div className="header-wrapper__cart-badge">
+          <div className="header-wrapper__cart-badge" onClick={()=>this.handleCart()}>
             <img
               src={EmptyCartImg}
               alt="cart-img"
@@ -50,6 +54,7 @@ class Header extends Component {
             />{" "}
             <div className="header-wrapper__items-num">5</div>
           </div>
+          {showCart && <CartOverlay />}
         </ul>
       </header>
     );

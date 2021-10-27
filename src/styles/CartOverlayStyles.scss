@@ -1,0 +1,47 @@
+@import "index.scss";
+
+.cart-overlay-wrapper {
+  position: absolute;
+  z-index: 2;
+  background-color: #fff;
+  top: 80px;
+  right: 120px;
+  width: 325px;
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  header{
+      font-weight: bold;
+      span{
+          font-weight: 500;
+          margin-left: 5px;
+      }
+      margin-bottom: 25px;
+  }
+  &__total {
+    display: flex;
+    justify-content: space-between;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+  }
+  &__footer-btns {
+      display:flex;
+      justify-content: space-evenly;
+      margin-top: 35px;
+    button {
+      width: 140px;
+      height: 43px;
+      border: 1px solid #1d1f22;
+      background-color: #fff;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    button:hover{
+        background-color: $fade-green;
+        color: #fff;
+    }
+  }
+}
