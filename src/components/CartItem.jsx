@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ItemImg from "../assets/itemImage.jpg";
 import * as dummy from "../utils/dummy.json";
-import "../styles/CartOverlayItemStyles.scss";
+import "../styles/CartItemStyles.scss";
 
-class CartOverlayItem extends Component {
+class CartItem extends Component {
   state = {
     numberOfItems: 0,
   };
@@ -18,7 +18,6 @@ class CartOverlayItem extends Component {
         this.setState((previousState) => ({
           numberOfItems: previousState.numberOfItems - 1,
         }));
-        console.log(this.props.numItems);
         this.props.handleNumItems(this.props.numItems - 1);
       }
     }
@@ -26,22 +25,14 @@ class CartOverlayItem extends Component {
   render() {
     // const { product } = this.props;
     const product = dummy.productItem;
-    const { numberOfItems } = this.state;
-    const AttributeItems = ({ items, itemsType, productName }) => {
+
+    const AttributeItems = ({ items }) => {
       return (
-        <ul className="cart-overlay-item-wrapper__attr-row">
+        <ul className="cart-item-wrapper__attr-row">
           {items.map((item, j) => {
             return (
-              <li key={j} className="cart-overlay-item-wrapper__attr-item">
-                <input
-                  id={item.value}
-                  type="radio"
-                  name={itemsType + productName}
-                  value={item.value}
-                />
-                <label class="custom-radio" for={item.value}>
-                  {item.displayValue}
-                </label>
+              <li key={j} className="cart-item-wrapper__attr-item">
+                <button>{item.displayValue}</button>
               </li>
             );
           })}
@@ -49,13 +40,11 @@ class CartOverlayItem extends Component {
       );
     };
     return (
-      <div className="cart-overlay-item-wrapper">
-        <section className="cart-overlay-item-wrapper__left">
-          <p className="cart-overlay-item-wrapper__brand">{"Brand"}</p>
-          <p className="cart-overlay-item-wrapper__product-name">
-            {"productName"}
-          </p>
-          <p className="cart-overlay-item-wrapper__price">
+      <div className="cart-item-wrapper">
+        <section className="cart-item-wrapper__left">
+          <p className="cart-item-wrapper__brand">{"Brand"}</p>
+          <p className="cart-item-wrapper__product-name">{"productName"}</p>
+          <p className="cart-item-wrapper__price">
             {new Intl.NumberFormat("en", {
               style: "currency",
               currency: "USD",
@@ -64,31 +53,27 @@ class CartOverlayItem extends Component {
           {product.attributes.map((attribute, i) => {
             return (
               <ul key={i}>
-                <AttributeItems
-                  items={attribute.items}
-                  itemsType={attribute.name}
-                  productName={product.name}
-                />
+                <AttributeItems items={attribute.items} />
               </ul>
             );
           })}
         </section>
-        <section className="cart-overlay-item-wrapper__right">
-          <div className="cart-overlay-item-wrapper__count">
+        <section className="cart-item-wrapper__right">
+          <div className="cart-item-wrapper__count">
             <button
-              value="+"
               onClick={(e) => {
                 this.handleCount(e);
               }}
+              value="+"
             >
               +
             </button>
-            {numberOfItems}
+            {this.state.numberOfItems}
             <button
-              value="-"
               onClick={(e) => {
                 this.handleCount(e);
               }}
+              value="-"
             >
               -
             </button>
@@ -100,4 +85,4 @@ class CartOverlayItem extends Component {
   }
 }
 
-export default CartOverlayItem;
+export default CartItem;

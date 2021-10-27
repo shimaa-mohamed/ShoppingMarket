@@ -8,17 +8,16 @@ import CartOverlay from "./CartOverlay";
 class Header extends Component {
   state = {
     showCurrencyOverlay: false,
-    showCart:false
+    showCart: false,
   };
   handleCurrency() {
-    this.setState({showCurrencyOverlay:!this.state.showCurrencyOverlay})
+    this.setState({ showCurrencyOverlay: !this.state.showCurrencyOverlay });
   }
-  handleCart() {
-    this.setState({showCart:!this.state.showCart})
+  handleShowCart() {
+    this.setState({ showCart: !this.state.showCart });
   }
   render() {
-    const { showCurrencyOverlay,showCart } = this.state;
-    console.log(showCurrencyOverlay);
+    const { showCurrencyOverlay, showCart } = this.state;
     return (
       <header className="header-wrapper">
         <ul className="header-wrapper__left">
@@ -40,21 +39,35 @@ class Header extends Component {
         <ul className="header-wrapper__right">
           <div
             className="header-wrapper__currency"
-            onClick={()=>this.handleCurrency()}
+            onClick={() => this.handleCurrency()}
           >
-            $ <img src={ArrowImg} alt="arrow-img" className={`${showCurrencyOverlay?"rotate":""}`} />
+            ${" "}
+            <img
+              src={ArrowImg}
+              alt="arrow-img"
+              className={`${showCurrencyOverlay ? "rotate" : ""}`}
+            />
             {showCurrencyOverlay && <CurrencyOverlay />}
           </div>
 
-          <div className="header-wrapper__cart-badge" onClick={()=>this.handleCart()}>
+          <div
+            className="header-wrapper__cart-badge"
+            onClick={() => this.handleShowCart()}
+          >
             <img
               src={EmptyCartImg}
               alt="cart-img"
               className="header-wrapper__cart-img"
             />{" "}
-            <div className="header-wrapper__items-num">5</div>
+            <div className="header-wrapper__items-num">{this.props.numItems}</div>
           </div>
-          {showCart && <CartOverlay />}
+          {showCart && (
+            <CartOverlay
+              handleShowCart={() => this.handleShowCart()}
+              numItems={this.props.numItems}
+              handleNumItems={this.props.handleNumItems}
+            />
+          )}
         </ul>
       </header>
     );

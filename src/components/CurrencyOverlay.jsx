@@ -4,7 +4,6 @@ import * as dummy from "../utils/dummy.json";
 
 class CurrencyOverlay extends Component {
   render() {
-    // console.log(dummy.currencies);
     return (
       <ul className="currency-overlay-wrapper">
         {dummy.currencies.map((item, i) => {
