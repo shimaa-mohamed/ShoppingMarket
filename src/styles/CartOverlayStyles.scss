@@ -13,6 +13,7 @@
 .cart-overlay-wrapper {
   position: absolute;
   z-index: 2;
+  overflow: scroll;
   background-color: #fff;
   right: 120px;
   width: 325px;

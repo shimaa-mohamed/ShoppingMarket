@@ -1,24 +1,34 @@
 import React, { Component } from "react";
-import ItemImg from "../assets/itemImage.jpg";
 import "../styles/ProductItemStyles.scss";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class ProductItem extends Component {
   render() {
-    const currentCurrency="USD";
     const { product } = this.props;
-    const {currency,amount}=product.prices.find((price)=>price.currency===currentCurrency);
+    const { selectedCurrency } = this.props;
+    const price = product.prices.find(
+      (price) => price.currency === selectedCurrency
+    );
     return (
-      <Link to={`/product/${123}`} product className="item-wrapper">
-        <img src={ItemImg} alt="item-img" className="item-wrapper__img" />
-        <p className="item-wrapper__describtion">{product.brand} {product.name}</p>
-        <p className="item-wrapper__price">
-          {new Intl.NumberFormat("en", {
-            style: "currency",
-            currency: currency,
-          }).format(amount)}
-        </p>
-      </Link>
+      <div>
+          <Link to={`/product/${product.id}`} className="item-wrapper">
+            <div className="item-wrapper__img-wrapper">
+            <img src={product.gallery[0]} alt="item-img" className="item-wrapper__img" />
+            <div className={product.inStock?"hide":"overlay"}></div>
+            <p className={product.inStock?"hide":"center"}>out of stock</p>
+            </div>
+            <p className="item-wrapper__describtion">
+              {product.brand} {product.name}
+            </p>
+            <p className="item-wrapper__price">
+              {selectedCurrency.length &&new Intl.NumberFormat("en", {
+                style: "currency",
+                currency: selectedCurrency,
+              }).format(price.amount)}
+            </p>
+          </Link>
+        
+      </div>
     );
   }
 }

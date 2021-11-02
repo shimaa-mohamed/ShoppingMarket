@@ -5,6 +5,8 @@ import EmptyCartImg from "../assets/emptyCartImg.svg";
 import "../styles/HeaderStyles.scss";
 import CurrencyOverlay from "./CurrencyOverlay";
 import CartOverlay from "./CartOverlay";
+import { Link } from "react-router-dom";
+
 class Header extends Component {
   state = {
     showCurrencyOverlay: false,
@@ -15,6 +17,9 @@ class Header extends Component {
   }
   handleShowCart() {
     this.setState({ showCart: !this.state.showCart });
+  }
+  componentDidMount(){
+    this.props.handleSelectedCurrency(this.props.currencies[0]);
   }
   render() {
     const { showCurrencyOverlay, showCart } = this.state;
@@ -31,11 +36,14 @@ class Header extends Component {
             <button>kids</button>
           </li>
         </ul>
-        <img
-          src={MiddleGreenImg}
-          alt="middle-green-svg"
-          className="header-wrapper__center"
-        />
+        <Link to="/">
+          <img
+            src={MiddleGreenImg}
+            alt="middle-green-svg"
+            className="header-wrapper__center"
+          />
+        </Link>
+
         <ul className="header-wrapper__right">
           <div
             className="header-wrapper__currency"
@@ -47,7 +55,13 @@ class Header extends Component {
               alt="arrow-img"
               className={`${showCurrencyOverlay ? "rotate" : ""}`}
             />
-            {showCurrencyOverlay && <CurrencyOverlay />}
+            {showCurrencyOverlay && (
+              <CurrencyOverlay
+                currencies={this.props.currencies}
+                handleSelectedCurrency={this.props.handleSelectedCurrency}
+                getTotalBill={this.props.getTotalBill}
+              />
+            )}
           </div>
 
           <div
@@ -59,13 +73,17 @@ class Header extends Component {
               alt="cart-img"
               className="header-wrapper__cart-img"
             />{" "}
-            <div className="header-wrapper__items-num">{this.props.numItems}</div>
+            <div className="header-wrapper__items-num">
+              {this.props.numItems}
+            </div>
           </div>
           {showCart && (
             <CartOverlay
               handleShowCart={() => this.handleShowCart()}
-              numItems={this.props.numItems}
-              handleNumItems={this.props.handleNumItems}
+              cart={this.props.cart}
+              handleCart={this.props.handleCart}
+              selectedCurrency={this.props.selectedCurrency}
+              totalBill={this.props.totalBill}
             />
           )}
         </ul>

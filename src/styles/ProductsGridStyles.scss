@@ -11,10 +11,12 @@
     right: 0;
     margin-inline: auto;
     place-items: center;
-    h1{
+    select{
         margin: 50px 0px 50px 0px;
         grid-column: span 3;
         justify-self: flex-start;
         margin-left: 20px;
+        font-size: 20px;
+        padding: 20px;
     }
 }

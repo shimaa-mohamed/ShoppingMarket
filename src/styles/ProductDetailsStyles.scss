@@ -12,8 +12,16 @@
   input[type="radio"] {
     display: none;
   }
-  input[type="radio"]:checked + label {
+  .inputChecked #swatch {
+    box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);
+    -webkit-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);
+    -moz-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);  }
+  .inputChecked{
     background-color: #000;
+    color: #fff;
+  }
+
+  .inputChecked .custom-radio{
     color: #fff;
   }
 
@@ -55,12 +63,13 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 100px;
+    padding-bottom: 35px;
   }
   &__add-to-cart {
     background-color: $fade-green;
     color: #fff;
     width: 100%;
-    height: 50px;
+    padding: 15px;
     align-self: center;
     margin: 20px 0 40px 0;
     cursor: pointer;
@@ -75,11 +84,17 @@
       height: 80px;
       margin-bottom: 32px;
     }
+    img:hover{
+      box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.62);
+      -webkit-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.62);
+      -moz-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.62);
+    }
   }
   &__big-img {
     display: block;
     width: 610px;
     height: 510px;
+    object-fit: contain;
   }
   &__attr-row {
     display: flex;

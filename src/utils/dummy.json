@@ -4,8 +4,14 @@
       "id": "123456",
       "name": "shoes",
       "inStock": true,
-      "gallery": "../assets/itemImage.jpg",
-      "description": "shoes gamela awy",
+      "gallery": [
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+      ],
+      "description": "<p>Great sneakers for everyday use!</p>",
       "category": "clothes",
       "attributes": [
         {
@@ -26,18 +32,26 @@
           ]
         }
       ],
-      "prices":[{
-          "currency":"USD",
-          "amount":75
-      }],
-      "brand":"apollo"
+      "prices": [
+        {
+          "currency": "USD",
+          "amount": 75
+        }
+      ],
+      "brand": "apollo"
     },
     {
-      "id": "123456",
+      "id": "55555",
       "name": "shoes",
       "inStock": true,
-      "gallery": "../assets/itemImage.jpg",
-      "description": "shoes gamela awy",
+      "gallery": [
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+      ],
+      "description": "<p>Great sneakers for everyday use!</p>",
       "category": "clothes",
       "attributes": [
         {
@@ -58,18 +72,26 @@
           ]
         }
       ],
-      "prices":[{
-        "currency":"USD",
-        "amount":75
-    }],
-    "brand":"apollo"
+      "prices": [
+        {
+          "currency": "USD",
+          "amount": 75
+        }
+      ],
+      "brand": "apollo"
     },
     {
-      "id": "123456",
+      "id": "122222",
       "name": "shoes",
       "inStock": true,
-      "gallery": "../assets/itemImage.jpg",
-      "description": "shoes gamela awy",
+      "gallery": [
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+      ],
+      "description": "<p>Great sneakers for everyday use!</p>",
       "category": "clothes",
       "attributes": [
         {
@@ -90,18 +112,26 @@
           ]
         }
       ],
-      "prices":[{
-        "currency":"USD",
-        "amount":75
-    }],
-    "brand":"apollo"
+      "prices": [
+        {
+          "currency": "USD",
+          "amount": 75
+        }
+      ],
+      "brand": "apollo"
     },
     {
-      "id": "123456",
+      "id": "123333",
       "name": "shoes",
       "inStock": true,
-      "gallery": "../assets/itemImage.jpg",
-      "description": "shoes gamela awy",
+      "gallery": [
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+      ],
+      "description": "<p>Great sneakers for everyday use!</p>",
       "category": "clothes",
       "attributes": [
         {
@@ -122,18 +152,26 @@
           ]
         }
       ],
-      "prices":[{
-        "currency":"USD",
-        "amount":75
-    }],
-    "brand":"apollo"
+      "prices": [
+        {
+          "currency": "USD",
+          "amount": 75
+        }
+      ],
+      "brand": "apollo"
     },
     {
-      "id": "123456",
+      "id": "144444",
       "name": "shoes",
       "inStock": true,
-      "gallery": "../assets/itemImage.jpg",
-      "description": "shoes gamela awy",
+      "gallery": [
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+        "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+      ],
+      "description": "<p>Great sneakers for everyday use!</p>",
       "category": "clothes",
       "attributes": [
         {
@@ -154,11 +192,13 @@
           ]
         }
       ],
-      "prices":[{
-        "currency":"USD",
-        "amount":75
-    }],
-    "brand":"apollo"
+      "prices": [
+        {
+          "currency": "USD",
+          "amount": 75
+        }
+      ],
+      "brand": "apollo"
     }
   ],
   "currencies": ["USD", "GBP", "AUD", "JPY", "RUB"],
@@ -166,8 +206,14 @@
     "id": "123456",
     "name": "shoes",
     "inStock": true,
-    "gallery": "../assets/itemImage.jpg",
-    "description": "shoes gamela awy",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087"
+    ],
+    "description": "<p>Great sneakers for everyday use!</p>",
     "category": "clothes",
     "attributes": [
       {
@@ -187,6 +233,7 @@
           }
         ]
       }
-    ],"brand":"apollo"
+    ],
+    "brand": "apollo"
   }
 }

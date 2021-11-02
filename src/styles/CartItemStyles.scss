@@ -3,7 +3,7 @@
 .cart-item-wrapper {
   display: flex;
   justify-content: space-between;
-//   margin: 0 100px;
+  //   margin: 0 100px;
   align-items: center;
   margin-bottom: 40px;
   border-top: 1px solid #e5e5e5;
@@ -17,24 +17,19 @@
     font-size: 30px;
     font-weight: 600;
   }
-  &__product-name{
-    color: #1D1F22;
+  &__product-name {
+    color: #1d1f22;
     font-size: 27px;
     font-weight: 100;
     margin: 8px 0;
   }
-  &__price{
+  &__price {
     font-size: 24px;
     font-weight: 700;
   }
   &__right {
     display: flex;
     padding: 10px;
-    img {
-      height: 185px;
-      width: 141px;
-      margin-left: 18px;
-    }
   }
   &__count {
     display: flex;
@@ -49,9 +44,9 @@
       cursor: pointer;
       font-size: 30px;
     }
-    button:hover{
-        background-color: #000;
-        color: #fff;
+    button:hover {
+      background-color: #000;
+      color: #fff;
     }
   }
   &__attr-row {
@@ -69,5 +64,69 @@
       background-color: #fff;
       cursor: pointer;
     }
+  }
+  &__img-wrapper {
+    position: relative;
+    height: 185px;
+    width: 141px;
+    margin-left: 18px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .arrow-div {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      z-index: 1;
+      height: 20%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .arrow {
+        height: 20px;
+        width: 20px;
+        margin: 0;
+        padding: 0;
+      }
+      .arrow:hover {
+        box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.8);
+        -webkit-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.8);
+        -moz-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.8);
+        path {
+          stroke: grey;
+        }
+      }
+    }
+  }
+  input[type="radio"] {
+    display: none;
+  }
+  .inputChecked #swatch {
+    box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);
+    -webkit-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);
+    -moz-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.82);
+  }
+  .inputChecked {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .inputChecked .custom-radio {
+    color: #fff;
+  }
+
+  .custom-radio {
+    color: #000;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid $text-color;
+    width: 65px;
+    height: 45px;
   }
 }
