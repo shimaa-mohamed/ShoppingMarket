@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../styles/CurrencyOverlayStyles.scss";
-import * as dummy from "../utils/dummy.json";
 
+/** This is a decribtion for the CurrencyOverlay component
+ * this is currency overlay component that lists the available currencies to deal with throw the store
+ */
 class CurrencyOverlay extends Component {
   render() {
     const {currencies}=this.props;

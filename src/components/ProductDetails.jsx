@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import "../styles/ProductDetailsStyles.scss";
-
+import AttributeItems from "./AttributeItems";
+/**This is a decribtion for the ProductDetails component
+ * this is product describtion page in which more info about the product is viewed and the user can add the item to cart in this page.
+ * @param {array} selectedOptions - keeps track of the items selected options in the cart
+ * @param {string} mainImg - keeps track of the main image to bw shown in the project describtion page 
+ * @function isOptionsNotSelected - returns true or false based on if the user selects all options or not
+ * @function addToCart - this function handles three cases when clicking add to card button (case1) if user didn't select all options an alert will pop up and item will not be added unless the user enters all the options required (case2) handles if the item is not in stock so also it will not be added to the cart (case3) when there is no execptions the item will be added to cart with the selected options the user added
+ * @function handleSelectedOptions - sets state of selectedOptions according to the selected values by the user
+ * @function handleSelectedImg - sets state of mainImg withe the selected image by user
+ */
 class ProductDetails extends Component {
   state = {
     selectedOptions: [],
@@ -27,6 +36,7 @@ class ProductDetails extends Component {
   }
   addToCart(product) {
     const { selectedOptions } = this.state;
+    const copySelectedOptions = JSON.parse(JSON.stringify(selectedOptions));
     if (!product.inStock) {
       alert("Sorry this item is out of stock !");
       return;
@@ -37,82 +47,26 @@ class ProductDetails extends Component {
     }
     const moreProductDetails = {
       quantity: 1,
-      selectedOptions,
+      selectedOptions: copySelectedOptions,
     };
     const customItem = { ...product, ...moreProductDetails };
+
     this.props.handleAddToCart(customItem);
   }
-  isChecked(val, itemsName) {
-    const { selectedOptions } = this.state;
-    return selectedOptions.some((attr) => {
-      return attr.userSelection === val && itemsName === attr.attributeName;
-    });
-  }
-  handleInput(e) {
-    const { name, value } = e.target;
-    const { selectedOptions } = this.state;
-    const editedAttributes = selectedOptions.map((attr) => {
-      if (attr.attributeName === name) {
-        attr.userSelection = value;
-      }
-      return attr;
-    });
+  handleSelectedOptions(editedAttributes) {
     this.setState({ selectedOptions: editedAttributes });
   }
   handleSelectedImg(imgSrc) {
     this.setState({ mainImg: imgSrc });
   }
   render() {
-    console.log(this.state.selectedOptions);
     const product = this.props.filteredProducts.find(
       (item) => item.id === this.props.productId
     );
-    const AttributeItems = ({
-      items,
-      itemsName,
-      productId,
-      itemType,
-      attrName,
-    }) => {
-      return (
-        <ul className="product-details-wrapper__attr-row">
-          {items.map((item, j) => {
-            return (
-              <li key={j} className="product-details-wrapper__attr-item">
-                <div
-                  className={this.isChecked(item.value,`${itemsName} ${productId}`) ? "inputChecked" : ""}
-                >
-                  <input
-                    id={`${itemsName}/${item.value}`}
-                    type="radio"
-                    name={`${itemsName} ${productId}`}
-                    value={item.value}
-                    onChange={(e) => this.handleInput(e)}
-                  />
-                  <label
-                    className="custom-radio"
-                    htmlFor={`${itemsName}/${item.value}`}
-                    id={itemType === "swatch" ? "swatch" : ""}
-                    style={
-                      itemType === "swatch"
-                        ? { backgroundColor: item.value }
-                        : null
-                    }
-                  >
-                    {itemType !== "swatch" ? item.displayValue : ""}
-                  </label>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      );
-    };
     const { selectedCurrency } = this.props;
     const price = product.prices.find(
       (price) => price.currency === selectedCurrency
     );
-    //console.log(this.state.selectedOptions.some((attr)=>attr.userSelection === "512G" && "Capacity apple-imac-2021"===attr.attributeName));
     return (
       <div className="product-details-wrapper">
         {selectedCurrency && (
@@ -155,7 +109,12 @@ class ProductDetails extends Component {
                       itemsName={attribute.name}
                       productId={product.id}
                       itemType={attribute.type}
-                      attrName={i}
+                      componentWrapper="product-details-wrapper"
+                      selectedOptions={this.state.selectedOptions}
+                      handleSelectedOptions={(editedAttributes) =>
+                        this.handleSelectedOptions(editedAttributes)
+                      }
+                      parentComponent="projectDetails"
                     />
                   </ul>
                 );

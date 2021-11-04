@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import ProductItem from "./ProductItem";
 import "../styles/ProductsGridStyles.scss";
+
+/** This is a decribtion for the ProductsGrid component
+ * this component is used for displaing the items available in the store according to the filteration of category
+ * @param {array} filteredProducts - "state" keeps track of products to be viewed according to certain filteration
+ * @function filterProducts - takes the filter category in which products will be filterd accordingly and adjusts the filtered state with new result of filteration
+ * @function getCategoriesNames - returns array of the available categories in the store
+ * @function handleInput - sets state of filteredProducts according to user selection
+ */
 class ProductsGrid extends Component {
   state = {
     filteredProducts: this.filterProducts("All"),
@@ -33,7 +41,6 @@ class ProductsGrid extends Component {
     });
   }
   componentDidMount() {
-    console.log("productsGrid mounted");
     this.props.handleFilterProduct(this.state.filteredProducts);
   }
   render() {

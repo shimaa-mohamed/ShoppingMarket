@@ -7,6 +7,13 @@ import CurrencyOverlay from "./CurrencyOverlay";
 import CartOverlay from "./CartOverlay";
 import { Link } from "react-router-dom";
 
+/**This is a decribtion for the Header component
+ * the header component contains three main parts (first) the left part whichh is the selection according to gender and age (second) the middle part which contains an icon that when clicked returns to main screen containing the grid of products (third) the right part contains the currency and carts buttons that shows their overlays
+ * @param {boolean} showCurrencyOverlay - "state" determines whether to show the currency overlay or not
+ * @param {boolean} showCart - "state" determines whether to show the cart overlay or 
+ * @function handleCurrency - sets the showCurrencyOverlay state 
+ * @function handleShowCart - sets the showCart state 
+ */
 class Header extends Component {
   state = {
     showCurrencyOverlay: false,
@@ -19,6 +26,7 @@ class Header extends Component {
     this.setState({ showCart: !this.state.showCart });
   }
   componentDidMount(){
+    //initiate selected currency with the first currency in currency array recieved from app component from backend
     this.props.handleSelectedCurrency(this.props.currencies[0]);
   }
   render() {
@@ -49,7 +57,12 @@ class Header extends Component {
             className="header-wrapper__currency"
             onClick={() => this.handleCurrency()}
           >
-            ${" "}
+            {
+                new Intl.NumberFormat("en", {
+                  style: "currency",
+                  currency: this.props.selectedCurrency?this.props.selectedCurrency:this.props.currencies[0],
+                }).format("")[0]
+              }
             <img
               src={ArrowImg}
               alt="arrow-img"
@@ -73,9 +86,12 @@ class Header extends Component {
               alt="cart-img"
               className="header-wrapper__cart-img"
             />{" "}
-            <div className="header-wrapper__items-num">
+            {
+              this.props.numItems!==0&& <div className="header-wrapper__items-num">
               {this.props.numItems}
             </div>
+            }
+            
           </div>
           {showCart && (
             <CartOverlay
@@ -84,6 +100,7 @@ class Header extends Component {
               handleCart={this.props.handleCart}
               selectedCurrency={this.props.selectedCurrency}
               totalBill={this.props.totalBill}
+              changeSelectedOptions={this.props.changeSelectedOptions}
             />
           )}
         </ul>

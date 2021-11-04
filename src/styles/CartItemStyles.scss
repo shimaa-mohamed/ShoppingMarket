@@ -3,7 +3,6 @@
 .cart-item-wrapper {
   display: flex;
   justify-content: space-between;
-  //   margin: 0 100px;
   align-items: center;
   margin-bottom: 40px;
   border-top: 1px solid #e5e5e5;
@@ -112,11 +111,9 @@
     background-color: #000;
     color: #fff;
   }
-
   .inputChecked .custom-radio {
     color: #fff;
   }
-
   .custom-radio {
     color: #000;
     font-size: 14px;
@@ -128,5 +125,41 @@
     border: 1px solid $text-color;
     width: 65px;
     height: 45px;
+  }
+}
+@media (max-width:500px){
+  .cart-item-wrapper {
+    width: 100%;
+    margin: 0;
+    &__brand {
+      font-size: 22px;
+    }
+    &__product-name {
+      font-size: 17px;
+    }
+    &__right{
+      max-width: 40%;
+    }
+    &__attr-row {
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+    &__count {
+      button {
+        width: 25px;
+        height: 25px;
+        font-size: 17px;
+      }
+    }
+    .custom-radio {
+      font-size: 14px;
+      width: 45px;
+      height: 35px;
+    }
+    &__img-wrapper {
+      height: 120px;
+      width: 100px;
+      margin-left: 18px;
+    }
   }
 }

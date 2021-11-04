@@ -76,3 +76,16 @@
       }
   }
 }
+
+@media (max-width:500px){
+  .header-wrapper {
+    padding: 0 10px;
+    &__left {
+      button {
+        padding: 18px 0px;
+        width: 45px;
+        font-size: .7em;
+      }
+    }
+  }
+}

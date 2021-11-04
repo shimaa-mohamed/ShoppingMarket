@@ -3,6 +3,11 @@ import CartItem from "./CartItem";
 import "../styles/CartOverlayStyles.scss";
 import { Link } from "react-router-dom";
 
+/** This is a decribtion for the CartOverlay component
+ * currency overlay is a component responsible for showing the cart items in any page in the app.
+ * @function getItemPrice - get the item price according to the selected currency
+ * @function handleTotalBill - calculates the total bill of the cart of the user.
+ */
 class CartOverlay extends Component {
   getItemPrice(cartItemPrices) {
     const { selectedCurrency } = this.props;
@@ -33,6 +38,7 @@ class CartOverlay extends Component {
             handleCart={this.props.handleCart}
             cart={cart}
             selectedCurrency={this.props.selectedCurrency}
+            changeSelectedOptions={this.props.changeSelectedOptions}
           />
         ))}
           <footer>

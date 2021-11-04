@@ -1,92 +1,50 @@
 import React, { Component } from "react";
-import {ReactComponent as RightArrow} from "../assets/right-arrow.svg";
-import {ReactComponent as LeftArrow} from "../assets/left-arrow.svg";
+import { ReactComponent as RightArrow } from "../assets/right-arrow.svg";
+import { ReactComponent as LeftArrow } from "../assets/left-arrow.svg";
 import "../styles/CartItemStyles.scss";
 import "../styles/CartOverlayItemStyles.scss";
+import AttributeItems from "./AttributeItems";
 
+/**This is a decribtion for the CartItem component
+ * the cart item component is responsible for Showing details about the items in the list including the quantity of that item in cart and the user selected options for that item, user can increament or decrement the item quantity throw clicking the + or - buttons that are attached with each item 
+ * @param {number} selectedImgIndex - "state" keeps track of the index of the image of item shown which can be changed when user clicks the arrows above the image.
+ * @function handleSelectedImg - is responsible of setting state of the selectedImgIndex by when user toogles between left and right arrow above the image
+ * @function handleCount - is reponsible for increamenting or decreamnting the quantity of the item in the cart 
+ * @function handleSelectedOptions - is responsible for saving the new selected options of the current item in cart
+ */
 class CartItem extends Component {
-  state={
-    selectedImgIndex:0
-  }
-  handleSelectedImg(leftOrRight){
-    const {selectedImgIndex}=this.state;
-    const galleryLength=this.props.product.gallery.length;
-    if(galleryLength===1) return;
-    if(leftOrRight==="left"&& selectedImgIndex>0){
-      this.setState({selectedImgIndex:this.state.selectedImgIndex-1})
+  state = {
+    selectedImgIndex: 0,
+  };
+  handleSelectedImg(leftOrRight) {
+    const { selectedImgIndex } = this.state;
+    const galleryLength = this.props.product.gallery.length;
+    if (galleryLength === 1) return;
+    if (leftOrRight === "left" && selectedImgIndex > 0) {
+      this.setState({ selectedImgIndex: this.state.selectedImgIndex - 1 });
     }
-    if(leftOrRight==="right"&& selectedImgIndex<galleryLength-1){
-      this.setState({selectedImgIndex:this.state.selectedImgIndex+1})
+    if (leftOrRight === "right" && selectedImgIndex < galleryLength - 1) {
+      this.setState({ selectedImgIndex: this.state.selectedImgIndex + 1 });
     }
   }
   handleCount(e) {
     if (e.target.value === "+") {
-      this.props.handleCart("+", this.props.product.id);
+      this.props.handleCart("+", this.props.product);
     } else {
       if (this.props.product.quantity > 0) {
-        this.props.handleCart("-", this.props.product.id);
+        this.props.handleCart("-", this.props.product);
       }
     }
   }
-  isChecked(val, itemsName) {
-    const { selectedOptions } = this.props.product;
-    return selectedOptions.some((attr) => {
-      return attr.userSelection === val && itemsName === attr.attributeName;
-    });
-  }
-  handleInput(e) {
-    const { name, value } = e.target;
-    const { selectedOptions } = this.props.product;
-    const editedAttributes = selectedOptions.map((attr) => {
-      if (attr.attributeName === name) attr.userSelection = value;
-      return attr;
-    });
-    this.setState({ selectedOptions: editedAttributes });
+  handleSelectedOptions(editedAttributes) {
+
   }
   render() {
     const { product, selectedCurrency } = this.props;
     const price = product.prices.find(
       (price) => price.currency === selectedCurrency
     );
-    const AttributeItems = ({ items, itemsName, productId, itemType }) => {
-      return (
-        <ul className={`${this.props.wrapperStyle}__attr-row`}>
-          {items.map((item, j) => {
-            return (
-              <li key={j} className={`${this.props.wrapperStyle}__attr-item`}>
-                <div
-                  className={
-                    this.isChecked(item.value, `${itemsName} ${productId}`)
-                      ? "inputChecked"
-                      : ""
-                  }
-                >
-                  <input
-                    id={`${itemsName}/${item.value}`}
-                    type="radio"
-                    name={`${itemsName} ${productId}`}
-                    value={item.value}
-                    onChange={(e) => this.handleInput(e)}
-                  />
-                  <label
-                    className="custom-radio"
-                    htmlFor={`${itemsName}/${item.value}`}
-                    id={itemType === "swatch" ? "swatch" : ""}
-                    style={
-                      itemType === "swatch"
-                        ? { backgroundColor: item.value }
-                        : null
-                    }
-                  >
-                    {itemType !== "swatch" ? item.displayValue : ""}
-                  </label>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      );
-    };
+
     return (
       <div className={`${this.props.wrapperStyle}`}>
         <section className={`${this.props.wrapperStyle}__left`}>
@@ -109,6 +67,12 @@ class CartItem extends Component {
                   itemsName={attribute.name}
                   productId={product.id}
                   itemType={attribute.type}
+                  componentWrapper={`${this.props.wrapperStyle}`}
+                  selectedOptions={this.props.product.selectedOptions}
+                  handleSelectedOptions={(editedAttributes) =>
+                    this.handleSelectedOptions(editedAttributes)
+                  }
+                  parentComponent="cartItem"
                 />
               </ul>
             );
@@ -135,10 +99,19 @@ class CartItem extends Component {
             </button>
           </div>
           <div className={`${this.props.wrapperStyle}__img-wrapper`}>
-            <img src={product.gallery[this.state.selectedImgIndex]} alt="item-img" />
+            <img
+              src={product.gallery[this.state.selectedImgIndex]}
+              alt="item-img"
+            />
             <div className="arrow-div">
-              <LeftArrow className="arrow" onClick={()=>this.handleSelectedImg("left")}/>
-              <RightArrow className="arrow" onClick={()=>this.handleSelectedImg("right")}/>
+              <LeftArrow
+                className="arrow"
+                onClick={() => this.handleSelectedImg("left")}
+              />
+              <RightArrow
+                className="arrow"
+                onClick={() => this.handleSelectedImg("right")}
+              />
             </div>
           </div>
         </section>

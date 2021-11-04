@@ -6,6 +6,27 @@ import ProductsGrid from "./components/ProductsGrid";
 import ProductDetails from "./components/ProductDetails";
 import { graphql } from "react-apollo";
 import { combinedQueries } from "./utils/gqlHelpers";
+
+/** This is a description of the App component.
+ * this component is the main component for the app which handles the routing and the shared data and methods through the app
+ * @param {number} numItems - "state" keeps track of number of items in the cart through the whole app
+ * @param {array} cart - "state" An array containing the items in the cart , each item contain product info and user selected options for that item and also the quantity of this item in cart
+ * @param {string} selectedCurrency - "state" keeps track of the selected currency code through the whole app
+ * @param {number} totalBill - "state" keeps track of the total bill based on the selected currency
+ * @param {array} filteredProducts - "state" An array containing the products to show in grid based on filteration according to category
+ * @param {object} data -"prop" contains categories, currencies, loading returned from graphql server 
+ * @function handleNumItems - sets state of numItems
+ * @function handleFilterProduct - sets state of filteredProducts.
+ * @function shallowEqual - returns true of false depending on whether the given objects are equal in keys and values.
+ * @function areSelectedOptionsSame - returns true of false depending on whether the given selected options for given items are same or not.
+ * @function isItemInCart - returns true of false depending on whether the given item is in cart with same id and selected options or not.
+ * @function getItemQuantity - returns number indicating the quantity of given item in the cart.
+ * @function incrementOrDecrementCart - edit the quantity of the item in cart according to required operation whether is was "+" so will increment the quantity of item in cart or "-" so it will decrement the quantity of item in the cart
+ * @function handleCart - this functions is used when clicking onClicking add or subtract buttons in cartOverlay or in CartPage handles incrementung or decrementing cart or removing the item if its quantity was one and the user subtract it from the cart to remove his order of that item.
+ * @function handleAddToCart - add item to cart it is called from the project describtion page and first check if the same item with same attr was added before, if so it will just increment the quantity of it in cart , but if it is not found it item will be appended in cart , and for both situations total number of items in cart will be increamented
+ * @function handleSelectedCurrency - sets state of selectedCurrency
+ */
+
 class App extends React.Component {
   state = {
     numItems: 0,
@@ -23,7 +44,6 @@ class App extends React.Component {
   shallowEqual(object1, object2) {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
-    console.log(object1, object2);
     if (keys1.length !== keys2.length) {
       return false;
     }
@@ -34,37 +54,41 @@ class App extends React.Component {
     }
     return true;
   }
-  isItemInCart(itemToBeAdded) {
-    // Check if cartItem is already in cart array
-    const { cart } = this.state;
-    if (cart.some((item) => item.id === itemToBeAdded.id) === false)
-      return false;
-
-    const itemWithSameId = cart.find((item) => item.id === itemToBeAdded.id);
-    for (let i = 0; i < itemToBeAdded.selectedOptions.length; i++) {
-      let obj1 = itemToBeAdded.selectedOptions[i];
-      let obj2 = itemWithSameId.selectedOptions[i];
-      // console.log(!this.shallowEqual(obj1,obj2));
-      if (!this.shallowEqual(obj1, obj2)) {
-        return false;
+  areSelectedOptionsSame(item1SelectedOptions,item2SelectedOptions){
+    // console.log(item1SelectedOptions,item2SelectedOptions);
+    for (let i = 0; i < item2SelectedOptions.length; i++) {
+      let obj1 = item2SelectedOptions[i];
+      let obj2 = item1SelectedOptions[i];
+      if (this.shallowEqual(obj1, obj2)) {
+        return true
       }
     }
-    return true;
+    return false
   }
-  getItemIndex(cartItemId) {
+  isItemInCart(itemToBeAdded) {
+    // Check if cartItem is already in cart array
+    const { cart } = this.state;    
+    if (cart.some((item) => item.id === itemToBeAdded.id) === false)
+      return false;
+      const itemsWithSameId=cart.filter((item) => item.id === itemToBeAdded.id);
+        for(let j=0;j<itemsWithSameId.length;j++)
+        {
+          if(this.areSelectedOptionsSame(itemsWithSameId[j].selectedOptions,itemToBeAdded.selectedOptions))
+          return true;
+        }
+    return false;
+  }
+  getItemQuantity(cartItem) {
     const { cart } = this.state;
-    return cart.findIndex((item) => item.id === cartItemId);
+    return cart.find((item) => item.id === cartItem.id && this.areSelectedOptionsSame(item.selectedOptions,cartItem.selectedOptions)).quantity;
   }
-  getItemQuantity(cartItemId) {
-    const { cart } = this.state;
-    return cart.find((item) => item.id === cartItemId).quantity;
-  }
-  incrementOrDecrementCart(cartItemId, operation) {
+  incrementOrDecrementCart(cartItem, operation) {
     const { cart } = this.state;
     const newCart = cart.map((item) => {
       const newQuantity =
         operation === "+" ? item.quantity + 1 : item.quantity - 1;
-      if (item.id === cartItemId) item.quantity = newQuantity;
+      if (this.areSelectedOptionsSame(cartItem.selectedOptions,item.selectedOptions))  {
+        item.quantity = newQuantity;}
       return item;
     });
     this.setState({ cart: newCart });
@@ -72,34 +96,31 @@ class App extends React.Component {
       numItems: operation === "+" ? prev.numItems + 1 : prev.numItems - 1,
     }));
   }
-  handleCart(operation, cartItemId) {
+  handleCart(operation, cartItem) {
     const { cart } = this.state;
     if (operation === "+") {
-      this.incrementOrDecrementCart(cartItemId, "+");
+      this.incrementOrDecrementCart(cartItem, "+");
     }
-    if (operation === "-" && this.getItemQuantity(cartItemId) === 1) {
+    if (operation === "-" && this.getItemQuantity(cartItem) === 1) {
       const filteredCart = cart.filter((item) => {
-        return item.id !== cartItemId;
+        return !(item.id === cartItem.id&&this.areSelectedOptionsSame(item.selectedOptions,cartItem.selectedOptions));
       });
       this.setState({ cart: filteredCart });
       this.setState((prev) => ({ numItems: prev.numItems - 1 }));
     }
-    if (operation === "-" && this.getItemQuantity(cartItemId) > 1) {
-      this.incrementOrDecrementCart(cartItemId, "-");
+    if (operation === "-" && this.getItemQuantity(cartItem) > 1) {
+      this.incrementOrDecrementCart(cartItem, "-");
     }
   }
   handleAddToCart(cartItem) {
-    // console.log(this.isItemInCart(cartItem));
     if (this.isItemInCart(cartItem)) {
-      this.incrementOrDecrementCart(cartItem.id, "+");
+      this.incrementOrDecrementCart(cartItem, "+");
     }
     // append new item to cart
     else {
       this.setState((prev) => ({ cart: [...prev.cart, cartItem] }));
       this.setState((prev) => ({ numItems: prev.numItems + 1 }));
     }
-    //TODO: fix isItemInCart fn
-    //TODO: ability to add same item but with different options in separate entry in the cart and the increment is based on the "id of the item and the selected options of this item"
   }
   handleSelectedCurrency(val) {
     this.setState({ selectedCurrency: val });
@@ -124,6 +145,7 @@ class App extends React.Component {
               selectedCurrency={this.state.selectedCurrency}
               totalBill={this.state.totalBill}
               getTotalBill={() => this.getTotalBill()}
+              changeSelectedOptions={(oldOptions,newOptions)=>this.changeSelectedOptions(oldOptions,newOptions)}
             />
             <Switch>
               <Route exact path="/">
@@ -161,6 +183,7 @@ class App extends React.Component {
                     productId={props.match.params.id}
                     selectedCurrency={this.state.selectedCurrency}
                     filteredProducts={this.state.filteredProducts}
+                    cart={this.state.cart}
                   />
                 )}
               ></Route>

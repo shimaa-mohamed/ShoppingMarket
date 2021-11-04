@@ -25,3 +25,8 @@
     background-color: lightgray;
   }
 }
+@media (max-width:500px){
+  .currency-overlay-wrapper {
+    left: -45px;
+  }
+}
