@@ -10,7 +10,6 @@ import AttributeItems from "./AttributeItems";
  * @param {number} selectedImgIndex - "state" keeps track of the index of the image of item shown which can be changed when user clicks the arrows above the image.
  * @function handleSelectedImg - is responsible of setting state of the selectedImgIndex by when user toogles between left and right arrow above the image
  * @function handleCount - is reponsible for increamenting or decreamnting the quantity of the item in the cart 
- * @function handleSelectedOptions - is responsible for saving the new selected options of the current item in cart
  */
 class CartItem extends Component {
   state = {
@@ -36,9 +35,7 @@ class CartItem extends Component {
       }
     }
   }
-  handleSelectedOptions(editedAttributes) {
 
-  }
   render() {
     const { product, selectedCurrency } = this.props;
     const price = product.prices.find(

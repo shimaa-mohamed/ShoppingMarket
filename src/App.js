@@ -55,7 +55,7 @@ class App extends React.Component {
     return true;
   }
   areSelectedOptionsSame(item1SelectedOptions,item2SelectedOptions){
-    // console.log(item1SelectedOptions,item2SelectedOptions);
+    if(item2SelectedOptions.length!==item1SelectedOptions.length) return false
     for (let i = 0; i < item2SelectedOptions.length; i++) {
       let obj1 = item2SelectedOptions[i];
       let obj2 = item1SelectedOptions[i];
@@ -96,6 +96,7 @@ class App extends React.Component {
       numItems: operation === "+" ? prev.numItems + 1 : prev.numItems - 1,
     }));
   }
+  
   handleCart(operation, cartItem) {
     const { cart } = this.state;
     if (operation === "+") {
