@@ -14,7 +14,7 @@ import { combinedQueries } from "./utils/gqlHelpers";
  * @param {string} selectedCurrency - "state" keeps track of the selected currency code through the whole app
  * @param {number} totalBill - "state" keeps track of the total bill based on the selected currency
  * @param {array} filteredProducts - "state" An array containing the products to show in grid based on filteration according to category
- * @param {object} data -"prop" contains categories, currencies, loading returned from graphql server 
+ * @param {object} data -"prop" contains categories, currencies, loading returned from graphql server
  * @function handleNumItems - sets state of numItems
  * @function handleFilterProduct - sets state of filteredProducts.
  * @function shallowEqual - returns true of false depending on whether the given objects are equal in keys and values.
@@ -54,41 +54,63 @@ class App extends React.Component {
     }
     return true;
   }
-  areSelectedOptionsSame(item1SelectedOptions,item2SelectedOptions){
-    if(item2SelectedOptions.length!==item1SelectedOptions.length) return false
+  areSelectedOptionsSame(item1SelectedOptions, item2SelectedOptions) {
+    if (item2SelectedOptions.length !== item1SelectedOptions.length)
+      return false;
     for (let i = 0; i < item2SelectedOptions.length; i++) {
       let obj1 = item2SelectedOptions[i];
       let obj2 = item1SelectedOptions[i];
       if (this.shallowEqual(obj1, obj2)) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
   isItemInCart(itemToBeAdded) {
     // Check if cartItem is already in cart array
-    const { cart } = this.state;    
+    const { cart } = this.state;
     if (cart.some((item) => item.id === itemToBeAdded.id) === false)
       return false;
-      const itemsWithSameId=cart.filter((item) => item.id === itemToBeAdded.id);
-        for(let j=0;j<itemsWithSameId.length;j++)
-        {
-          if(this.areSelectedOptionsSame(itemsWithSameId[j].selectedOptions,itemToBeAdded.selectedOptions))
-          return true;
-        }
+    const itemsWithSameId = cart.filter((item) => item.id === itemToBeAdded.id);
+    for (let j = 0; j < itemsWithSameId.length; j++) {
+      
+      if (
+        itemToBeAdded.selectedOptions.length===0||
+        this.areSelectedOptionsSame(
+          itemsWithSameId[j].selectedOptions,
+          itemToBeAdded.selectedOptions
+        )
+      )
+        return true;
+    }
     return false;
   }
   getItemQuantity(cartItem) {
     const { cart } = this.state;
-    return cart.find((item) => item.id === cartItem.id && this.areSelectedOptionsSame(item.selectedOptions,cartItem.selectedOptions)).quantity;
+    return cart.find(
+      (item) =>
+        item.id === cartItem.id &&
+        (cartItem.selectedOptions.length===0||this.areSelectedOptionsSame(
+          item.selectedOptions,
+          cartItem.selectedOptions
+        ))
+        
+    ).quantity;
   }
   incrementOrDecrementCart(cartItem, operation) {
     const { cart } = this.state;
     const newCart = cart.map((item) => {
       const newQuantity =
         operation === "+" ? item.quantity + 1 : item.quantity - 1;
-      if (this.areSelectedOptionsSame(cartItem.selectedOptions,item.selectedOptions))  {
-        item.quantity = newQuantity;}
+      if (
+        cartItem.selectedOptions.length===0||
+        this.areSelectedOptionsSame(
+          cartItem.selectedOptions,
+          item.selectedOptions
+        )
+      ) {
+        item.quantity = newQuantity;
+      }
       return item;
     });
     this.setState({ cart: newCart });
@@ -96,7 +118,6 @@ class App extends React.Component {
       numItems: operation === "+" ? prev.numItems + 1 : prev.numItems - 1,
     }));
   }
-  
   handleCart(operation, cartItem) {
     const { cart } = this.state;
     if (operation === "+") {
@@ -104,7 +125,13 @@ class App extends React.Component {
     }
     if (operation === "-" && this.getItemQuantity(cartItem) === 1) {
       const filteredCart = cart.filter((item) => {
-        return !(item.id === cartItem.id&&this.areSelectedOptionsSame(item.selectedOptions,cartItem.selectedOptions));
+        return !(
+          item.id === cartItem.id &&(cartItem.selectedOptions.length===0||
+          this.areSelectedOptionsSame(
+            item.selectedOptions,
+            cartItem.selectedOptions
+          )
+        ));
       });
       this.setState({ cart: filteredCart });
       this.setState((prev) => ({ numItems: prev.numItems - 1 }));
@@ -146,7 +173,9 @@ class App extends React.Component {
               selectedCurrency={this.state.selectedCurrency}
               totalBill={this.state.totalBill}
               getTotalBill={() => this.getTotalBill()}
-              changeSelectedOptions={(oldOptions,newOptions)=>this.changeSelectedOptions(oldOptions,newOptions)}
+              changeSelectedOptions={(oldOptions, newOptions) =>
+                this.changeSelectedOptions(oldOptions, newOptions)
+              }
             />
             <Switch>
               <Route exact path="/">
