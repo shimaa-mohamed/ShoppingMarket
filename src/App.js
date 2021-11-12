@@ -35,6 +35,15 @@ class App extends React.Component {
     filteredProducts: [],
     totalBill: 0,
   };
+  allProducts(categories) {
+    // const { categories } = this.props;
+    let allProductsArr;
+    const productsArray = categories.map((category) => {
+      return category.products;
+    });
+    allProductsArr = productsArray.flat(1);
+    return allProductsArr;
+  }
   handleNumItems(newNumItems) {
     this.setState({ numItems: newNumItems });
   }
@@ -60,11 +69,11 @@ class App extends React.Component {
     for (let i = 0; i < item2SelectedOptions.length; i++) {
       let obj1 = item2SelectedOptions[i];
       let obj2 = item1SelectedOptions[i];
-      if (this.shallowEqual(obj1, obj2)) {
-        return true;
+      if (!this.shallowEqual(obj1, obj2)) {
+        return false;
       }
     }
-    return false;
+    return true;
   }
   isItemInCart(itemToBeAdded) {
     // Check if cartItem is already in cart array
@@ -73,15 +82,16 @@ class App extends React.Component {
       return false;
     const itemsWithSameId = cart.filter((item) => item.id === itemToBeAdded.id);
     for (let j = 0; j < itemsWithSameId.length; j++) {
-      
       if (
-        itemToBeAdded.selectedOptions.length===0||
+        itemToBeAdded.selectedOptions.length === 0 ||
         this.areSelectedOptionsSame(
           itemsWithSameId[j].selectedOptions,
           itemToBeAdded.selectedOptions
         )
-      )
+      ) {
+        console.log("ytra", itemToBeAdded.selectedOptions.length === 0);
         return true;
+      }
     }
     return false;
   }
@@ -90,11 +100,11 @@ class App extends React.Component {
     return cart.find(
       (item) =>
         item.id === cartItem.id &&
-        (cartItem.selectedOptions.length===0||this.areSelectedOptionsSame(
-          item.selectedOptions,
-          cartItem.selectedOptions
-        ))
-        
+        (cartItem.selectedOptions.length === 0 ||
+          this.areSelectedOptionsSame(
+            item.selectedOptions,
+            cartItem.selectedOptions
+          ))
     ).quantity;
   }
   incrementOrDecrementCart(cartItem, operation) {
@@ -103,7 +113,7 @@ class App extends React.Component {
       const newQuantity =
         operation === "+" ? item.quantity + 1 : item.quantity - 1;
       if (
-        cartItem.selectedOptions.length===0||
+        item.selectedOptions.length === 0 ||
         this.areSelectedOptionsSame(
           cartItem.selectedOptions,
           item.selectedOptions
@@ -126,12 +136,13 @@ class App extends React.Component {
     if (operation === "-" && this.getItemQuantity(cartItem) === 1) {
       const filteredCart = cart.filter((item) => {
         return !(
-          item.id === cartItem.id &&(cartItem.selectedOptions.length===0||
-          this.areSelectedOptionsSame(
-            item.selectedOptions,
-            cartItem.selectedOptions
-          )
-        ));
+          item.id === cartItem.id &&
+          (cartItem.selectedOptions.length === 0 ||
+            this.areSelectedOptionsSame(
+              item.selectedOptions,
+              cartItem.selectedOptions
+            ))
+        );
       });
       this.setState({ cart: filteredCart });
       this.setState((prev) => ({ numItems: prev.numItems - 1 }));
@@ -181,6 +192,7 @@ class App extends React.Component {
               <Route exact path="/">
                 <ProductsGrid
                   categories={categories}
+                  allItems={this.allProducts(categories)}
                   selectedCurrency={this.state.selectedCurrency}
                   currencies={currencies}
                   handleSelectedCurrency={(val) =>
@@ -212,7 +224,7 @@ class App extends React.Component {
                     }
                     productId={props.match.params.id}
                     selectedCurrency={this.state.selectedCurrency}
-                    filteredProducts={this.state.filteredProducts}
+                    filteredProducts={this.allProducts(categories)}
                     cart={this.state.cart}
                   />
                 )}

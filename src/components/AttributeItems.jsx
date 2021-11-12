@@ -10,26 +10,34 @@ import "../styles/CartOverlayItemStyles.scss";
  */
 
 class AttributeItems extends Component {
-  isChecked(val, itemsName) {
+  isChecked(val, attributesName) {
     const { selectedOptions } = this.props;
     return selectedOptions.some((attr) => {
-      return attr.userSelection === val && itemsName === attr.attributeName;
+      return (
+        attr.userSelection === val && attributesName === attr.attributeName
+      );
     });
   }
   handleInput(e) {
     const { name, value } = e.target;
-    const {selectedOptions}=this.props
+    const { selectedOptions } = this.props;
     const editedAttributes = selectedOptions.map((attr) => {
       if (attr.attributeName === name) {
         attr.userSelection = value;
       }
       return attr;
     });
-    if(this.props.parentComponent==="projectDetails") this.props.handleSelectedOptions(editedAttributes);
+    if (this.props.parentComponent === "projectDetails")
+      this.props.handleSelectedOptions(editedAttributes);
   }
   render() {
-    const { items, itemsName, productId, itemType, componentWrapper } =
-      this.props;
+    const {
+      items,
+      attributesName,
+      productId,
+      attributeType,
+      componentWrapper,
+    } = this.props;
     return (
       <div>
         <ul className={`${componentWrapper}__attr-row`}>
@@ -38,29 +46,29 @@ class AttributeItems extends Component {
               <li key={j} className={`${componentWrapper}__attr-item`}>
                 <div
                   className={
-                    this.isChecked(item.value, `${itemsName} ${productId}`)
+                    this.isChecked(item.value, `${attributesName} ${productId}`)
                       ? "inputChecked"
                       : ""
                   }
                 >
                   <input
-                    id={`${itemsName}/${item.value}`}
+                    id={`${attributesName}/${item.value}`}
                     type="radio"
-                    name={`${itemsName} ${productId}`}
+                    name={`${attributesName} ${productId}`}
                     value={item.value}
                     onChange={(e) => this.handleInput(e)}
                   />
                   <label
                     className="custom-radio"
-                    htmlFor={`${itemsName}/${item.value}`}
-                    id={itemType === "swatch" ? "swatch" : ""}
+                    htmlFor={`${attributesName}/${item.value}`}
+                    id={attributeType === "swatch" ? "swatch" : ""}
                     style={
-                      itemType === "swatch"
+                      attributeType === "swatch"
                         ? { backgroundColor: item.value }
                         : null
                     }
                   >
-                    {itemType !== "swatch" ? item.displayValue : ""}
+                    {attributeType !== "swatch" ? item.displayValue : ""}
                   </label>
                 </div>
               </li>

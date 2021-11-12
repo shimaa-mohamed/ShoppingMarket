@@ -6,10 +6,10 @@ import "../styles/CartOverlayItemStyles.scss";
 import AttributeItems from "./AttributeItems";
 
 /**This is a decribtion for the CartItem component
- * the cart item component is responsible for Showing details about the items in the list including the quantity of that item in cart and the user selected options for that item, user can increament or decrement the item quantity throw clicking the + or - buttons that are attached with each item 
+ * the cart item component is responsible for Showing details about the items in the list including the quantity of that item in cart and the user selected options for that item, user can increament or decrement the item quantity throw clicking the + or - buttons that are attached with each item
  * @param {number} selectedImgIndex - "state" keeps track of the index of the image of item shown which can be changed when user clicks the arrows above the image.
  * @function handleSelectedImg - is responsible of setting state of the selectedImgIndex by when user toogles between left and right arrow above the image
- * @function handleCount - is reponsible for increamenting or decreamnting the quantity of the item in the cart 
+ * @function handleCount - is reponsible for increamenting or decreamnting the quantity of the item in the cart
  */
 class CartItem extends Component {
   state = {
@@ -61,9 +61,9 @@ class CartItem extends Component {
               <ul key={i}>
                 <AttributeItems
                   items={attribute.items}
-                  itemsName={attribute.name}
+                  attributesName={attribute.name}
                   productId={product.id}
-                  itemType={attribute.type}
+                  attributeType={attribute.type}
                   componentWrapper={`${this.props.wrapperStyle}`}
                   selectedOptions={this.props.product.selectedOptions}
                   handleSelectedOptions={(editedAttributes) =>

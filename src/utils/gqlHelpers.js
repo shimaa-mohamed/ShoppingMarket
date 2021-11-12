@@ -37,6 +37,7 @@ const getCurrencies = gql`
 `;
 
 const combinedQueries=gql`{
+  
   categories {
     name
     products {
