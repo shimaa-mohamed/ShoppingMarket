@@ -7,7 +7,6 @@ import { GET_CATEGORY } from "../utils/gqlHelpers";
 /** This is a decribtion for the ProductsGrid component
  * this component is used for displaing the items available in the store according to the filteration of category
  * @param {string} filter - "state" keeps track of filter used
- * @function allProducts - takes the filter category in which products will be filterd accordingly and adjusts the filtered state with new result of filteration
  * @function getCategoriesNames - returns array of the available categories in the store
  * @function handleInput - sets state of filter according to user selection
  */

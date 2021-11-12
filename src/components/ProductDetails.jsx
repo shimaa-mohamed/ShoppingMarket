@@ -12,6 +12,7 @@ import { GET_PRODUCT } from "../utils/gqlHelpers";
  * @function addToCart - this function handles three cases when clicking add to card button (case1) if user didn't select all options an alert will pop up and item will not be added unless the user enters all the options required (case2) handles if the item is not in stock so also it will not be added to the cart (case3) when there is no execptions the item will be added to cart with the selected options the user added
  * @function handleSelectedOptions - sets state of selectedOptions according to the selected values by the user
  * @function handleSelectedImg - sets state of mainImg withe the selected image by user
+ * @function getPriceAmount - returns the price of item according to selected currency
  */
 
 class ProductDetails extends Component {
