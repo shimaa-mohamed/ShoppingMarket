@@ -1,46 +1,17 @@
 import React, { Component } from "react";
 import ProductItem from "./ProductItem";
 import "../styles/ProductsGridStyles.scss";
-import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
+import { GET_CATEGORY } from "../utils/gqlHelpers";
 
 /** This is a decribtion for the ProductsGrid component
  * this component is used for displaing the items available in the store according to the filteration of category
- * @param {array} allProductsArr - "state" keeps track of products to be viewed according to certain filteration
+ * @param {string} filter - "state" keeps track of filter used
  * @function allProducts - takes the filter category in which products will be filterd accordingly and adjusts the filtered state with new result of filteration
  * @function getCategoriesNames - returns array of the available categories in the store
- * @function handleInput - sets state of allProductsArr according to user selection
+ * @function handleInput - sets state of filter according to user selection
  */
-const GET_CATEGORY = gql`
-  query category($categoryInput: CategoryInput) {
-    category(input: $categoryInput) {
-      name
-      products {
-        id
-        name
-        inStock
-        gallery
-        description
-        category
-        attributes {
-          id
-          name
-          type
-          items {
-            displayValue
-            value
-            id
-          }
-        }
-        prices {
-          currency
-          amount
-        }
-        brand
-      }
-    }
-  }
-`;
+
 class ProductsGrid extends Component {
   state = {
     filter: "All",
@@ -55,9 +26,7 @@ class ProductsGrid extends Component {
       filter: e.target.value,
     });
   }
-  componentDidMount() {
-    this.props.handleFilterProduct(this.state.allProductsArr);
-  }
+
   render() {
     const { filter } = this.state;
     return (

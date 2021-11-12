@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "../styles/ProductDetailsStyles.scss";
 import AttributeItems from "./AttributeItems";
-import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
+import { GET_PRODUCT } from "../utils/gqlHelpers";
+
 /**This is a decribtion for the ProductDetails component
  * this is product describtion page in which more info about the product is viewed and the user can add the item to cart in this page.
  * @param {array} selectedOptions - keeps track of the items selected options in the cart
@@ -12,33 +13,6 @@ import { Query } from "react-apollo";
  * @function handleSelectedOptions - sets state of selectedOptions according to the selected values by the user
  * @function handleSelectedImg - sets state of mainImg withe the selected image by user
  */
-const GET_PRODUCT = gql`
-  query product($productId: String!) {
-    product(id: $productId) {
-      id
-      name
-      inStock
-      gallery
-      description
-      category
-      attributes {
-        id
-        name
-        type
-        items {
-          displayValue
-          value
-          id
-        }
-      }
-      prices {
-        currency
-        amount
-      }
-      brand
-    }
-  }
-`;
 
 class ProductDetails extends Component {
   state = {
@@ -46,7 +20,7 @@ class ProductDetails extends Component {
     mainImg: "",
   };
   componentDidMount() {
-    const product = this.props.filteredProducts.find(
+    const product = this.props.allItems.find(
       (item) => item.id === this.props.productId
     );
     this.setState({ mainImg: product.gallery[0] });

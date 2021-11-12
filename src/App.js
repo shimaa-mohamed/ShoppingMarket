@@ -13,10 +13,8 @@ import { combinedQueries } from "./utils/gqlHelpers";
  * @param {array} cart - "state" An array containing the items in the cart , each item contain product info and user selected options for that item and also the quantity of this item in cart
  * @param {string} selectedCurrency - "state" keeps track of the selected currency code through the whole app
  * @param {number} totalBill - "state" keeps track of the total bill based on the selected currency
- * @param {array} filteredProducts - "state" An array containing the products to show in grid based on filteration according to category
  * @param {object} data -"prop" contains categories, currencies, loading returned from graphql server
  * @function handleNumItems - sets state of numItems
- * @function handleFilterProduct - sets state of filteredProducts.
  * @function shallowEqual - returns true of false depending on whether the given objects are equal in keys and values.
  * @function areSelectedOptionsSame - returns true of false depending on whether the given selected options for given items are same or not.
  * @function isItemInCart - returns true of false depending on whether the given item is in cart with same id and selected options or not.
@@ -25,6 +23,7 @@ import { combinedQueries } from "./utils/gqlHelpers";
  * @function handleCart - this functions is used when clicking onClicking add or subtract buttons in cartOverlay or in CartPage handles incrementung or decrementing cart or removing the item if its quantity was one and the user subtract it from the cart to remove his order of that item.
  * @function handleAddToCart - add item to cart it is called from the project describtion page and first check if the same item with same attr was added before, if so it will just increment the quantity of it in cart , but if it is not found it item will be appended in cart , and for both situations total number of items in cart will be increamented
  * @function handleSelectedCurrency - sets state of selectedCurrency
+ * @function allProducts -returns all products available from all categories in one array
  */
 
 class App extends React.Component {
@@ -32,11 +31,9 @@ class App extends React.Component {
     numItems: 0,
     cart: [],
     selectedCurrency: "",
-    filteredProducts: [],
     totalBill: 0,
   };
   allProducts(categories) {
-    // const { categories } = this.props;
     let allProductsArr;
     const productsArray = categories.map((category) => {
       return category.products;
@@ -46,9 +43,6 @@ class App extends React.Component {
   }
   handleNumItems(newNumItems) {
     this.setState({ numItems: newNumItems });
-  }
-  handleFilterProduct(filteredProducts) {
-    this.setState({ filteredProducts: filteredProducts });
   }
   shallowEqual(object1, object2) {
     const keys1 = Object.keys(object1);
@@ -198,7 +192,6 @@ class App extends React.Component {
                   handleSelectedCurrency={(val) =>
                     this.handleSelectedCurrency(val)
                   }
-                  handleFilterProduct={(val) => this.handleFilterProduct(val)}
                 />
               </Route>
               <Route path="/cart">
@@ -224,7 +217,7 @@ class App extends React.Component {
                     }
                     productId={props.match.params.id}
                     selectedCurrency={this.state.selectedCurrency}
-                    filteredProducts={this.allProducts(categories)}
+                    allItems={this.allProducts(categories)}
                     cart={this.state.cart}
                   />
                 )}
