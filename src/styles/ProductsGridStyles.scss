@@ -11,12 +11,11 @@
   right: 0;
   margin-inline: auto;
   place-items: center;
-  select {
+  h1 {
+    text-transform: capitalize;
     margin: 50px 0px 50px 0px;
     grid-column: span 3;
     justify-self: flex-start;
-    margin-left: 20px;
-    font-size: 20px;
     padding: 20px;
   }
 }
@@ -24,7 +23,7 @@
   .product-grid-wrapper {
     padding: 0 5px;
     gap: 40px;
-    select {
+    h1 {
       width: 90%;
     }
   }

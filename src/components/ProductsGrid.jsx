@@ -6,40 +6,16 @@ import { GET_CATEGORY } from "../utils/gqlHelpers";
 
 /** This is a decribtion for the ProductsGrid component
  * this component is used for displaing the items available in the store according to the filteration of category
- * @param {string} filter - "state" keeps track of filter used
- * @function getCategoriesNames - returns array of the available categories in the store
- * @function handleInput - sets state of filter according to user selection
  */
 
 class ProductsGrid extends Component {
-  state = {
-    filter: "All",
-  };
-  getCategoriesNames() {
-    const { categories } = this.props;
-    const categoriesNames = categories.map((categoty) => categoty.name);
-    return categoriesNames;
-  }
-  handleInput(e) {
-    this.setState({
-      filter: e.target.value,
-    });
-  }
-
   render() {
-    const { filter } = this.state;
+    const { filter } = this.props;
     return (
       <>
         {this.props.allItems ? (
           <div className="product-grid-wrapper">
-            <select defaultValue="All" onChange={(e) => this.handleInput(e)}>
-              <option value="All">ALL</option>
-              {this.getCategoriesNames().map((categoryName, index) => (
-                <option key={index} value={categoryName}>
-                  {categoryName}
-                </option>
-              ))}
-            </select>
+            <h1>{filter}</h1>
             {filter === "All" ? (
               <>
                 {this.props.allItems.map((item, i) => (

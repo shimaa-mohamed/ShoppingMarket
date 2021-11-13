@@ -13,11 +13,13 @@ import { Link } from "react-router-dom";
  * @param {boolean} showCart - "state" determines whether to show the cart overlay or 
  * @function handleCurrency - sets the showCurrencyOverlay state 
  * @function handleShowCart - sets the showCart state 
+ * @function getCategoriesNames - returns array of the available categories in the store
  */
 class Header extends Component {
   state = {
     showCurrencyOverlay: false,
     showCart: false,
+    
   };
   handleCurrency() {
     this.setState({ showCurrencyOverlay: !this.state.showCurrencyOverlay });
@@ -25,24 +27,31 @@ class Header extends Component {
   handleShowCart() {
     this.setState({ showCart: !this.state.showCart });
   }
+  getCategoriesNames() {
+    const { categories } = this.props;
+    const categoriesNames = categories.map((categoty) => categoty.name);
+    return categoriesNames;
+  }
   componentDidMount(){
     //initiate selected currency with the first currency in currency array recieved from app component from backend
     this.props.handleSelectedCurrency(this.props.currencies[0]);
   }
   render() {
     const { showCurrencyOverlay, showCart } = this.state;
+
     return (
       <header className="header-wrapper">
-        <ul className="header-wrapper__left">
-          <li>
-            <button>women</button>
+      <ul className="header-wrapper__left">
+          <li onClick={()=>this.props.handleFilter("All")}>
+            <button>All</button>
           </li>
-          <li>
-            <button>men</button>
-          </li>
-          <li>
-            <button>kids</button>
-          </li>
+          {this.getCategoriesNames().map((categoryName, index) => {
+            return (
+              <li key={index} onClick={()=>this.props.handleFilter(categoryName)}>
+                <button>{categoryName}</button>
+              </li>
+            );
+          })}
         </ul>
         <Link to="/">
           <img

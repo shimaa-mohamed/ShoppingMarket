@@ -14,6 +14,8 @@ import { combinedQueries } from "./utils/gqlHelpers";
  * @param {string} selectedCurrency - "state" keeps track of the selected currency code through the whole app
  * @param {number} totalBill - "state" keeps track of the total bill based on the selected currency
  * @param {object} data -"prop" contains categories, currencies, loading returned from graphql server
+ * @param {string} filter - "state" keeps track of filter used
+ * @function handleFilter - sets state of filter according to user selection
  * @function handleNumItems - sets state of numItems
  * @function shallowEqual - returns true of false depending on whether the given objects are equal in keys and values.
  * @function areSelectedOptionsSame - returns true of false depending on whether the given selected options for given items are same or not.
@@ -32,6 +34,7 @@ class App extends React.Component {
     cart: [],
     selectedCurrency: "",
     totalBill: 0,
+    filter: "All",
   };
   allProducts(categories) {
     let allProductsArr;
@@ -158,9 +161,15 @@ class App extends React.Component {
   handleSelectedCurrency(val) {
     this.setState({ selectedCurrency: val });
   }
+  handleFilter(filterVal) {
+    this.setState({
+      filter:filterVal,
+    });
+  }
 
   render() {
     const { categories, currencies, loading } = this.props.data;
+    console.log(this.state.filter);
     return (
       <Router className="app-wrapper">
         {loading ? (
@@ -181,6 +190,8 @@ class App extends React.Component {
               changeSelectedOptions={(oldOptions, newOptions) =>
                 this.changeSelectedOptions(oldOptions, newOptions)
               }
+              categories={categories}
+              handleFilter={(filterVal)=>this.handleFilter(filterVal)}
             />
             <Switch>
               <Route exact path="/">
@@ -192,6 +203,7 @@ class App extends React.Component {
                   handleSelectedCurrency={(val) =>
                     this.handleSelectedCurrency(val)
                   }
+                  filter={this.state.filter}
                 />
               </Route>
               <Route path="/cart">
